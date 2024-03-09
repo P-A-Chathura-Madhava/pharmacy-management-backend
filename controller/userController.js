@@ -67,4 +67,28 @@ const deleteAUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "user deleted" });
 });
 
-export { createUser, loginUserCtrl, getAllUsers, getAUser, deleteAUser };
+const updateAUser = asyncHandler(async (req, res) => {
+  // console.log("Update a user");
+  const user = await User.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  const { name, username, password } = req.body;
+  await user.set({
+    name: name,
+    username: username,
+    password: password,
+  });
+  await user.save();
+  res.status(200).json(user);
+});
+
+export {
+  createUser,
+  loginUserCtrl,
+  getAllUsers,
+  getAUser,
+  deleteAUser,
+  updateAUser,
+};

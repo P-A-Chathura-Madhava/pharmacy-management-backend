@@ -56,4 +56,15 @@ const getAUser = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
-export { createUser, loginUserCtrl, getAllUsers, getAUser };
+const deleteAUser = asyncHandler(async (req, res) => {
+  //   console.log("Delete a user");
+  const user = await User.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  await user.destroy();
+  res.status(200).json({ message: "user deleted" });
+});
+
+export { createUser, loginUserCtrl, getAllUsers, getAUser, deleteAUser };

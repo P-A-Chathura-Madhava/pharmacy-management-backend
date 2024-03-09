@@ -62,10 +62,25 @@ const updateAMedication = asyncHandler(async (req, res) => {
   res.status(200).json(medication);
 });
 
+const softDeleteAMedication = asyncHandler(async (req, res) => {
+    // console.log("soft delete a medication");
+    const medication = await Medication.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    await medication.set({
+      markDelete: true,
+    });
+    await medication.save();
+    res.status(200).json(medication);
+  });
+
 export {
   createMedication,
   getAllMedications,
   getAMedication,
   deleteAMedication,
   updateAMedication,
+  softDeleteAMedication
 };

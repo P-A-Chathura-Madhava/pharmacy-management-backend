@@ -25,4 +25,14 @@ const createCustomer = asyncHandler(async (req, res) => {
     res.status(200).json(customers);
   });
 
-export {createCustomer, getAllCustomers};
+  const getACustomer = asyncHandler(async (req, res) => {
+    // console.log("get a customer");
+    const customer = await Customer.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(customer);
+  });
+
+export {createCustomer, getAllCustomers, getACustomer};

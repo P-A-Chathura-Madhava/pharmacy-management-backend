@@ -35,4 +35,15 @@ const createCustomer = asyncHandler(async (req, res) => {
     res.status(200).json(customer);
   });
 
-export {createCustomer, getAllCustomers, getACustomer};
+  const deleteACustomer = asyncHandler(async (req, res) => {
+    //   console.log("Delete a customer");
+    const customer = await Customer.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    await customer.destroy();
+    res.status(200).json({ message: "customer deleted" });
+  });
+
+export {createCustomer, getAllCustomers, getACustomer, deleteACustomer};

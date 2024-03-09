@@ -46,4 +46,21 @@ const createCustomer = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "customer deleted" });
   });
 
-export {createCustomer, getAllCustomers, getACustomer, deleteACustomer};
+  const updateACustomer = asyncHandler(async (req, res) => {
+    //   console.log("Update a customer");
+      const customer = await Customer.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      const { name, address, contact } = req.body;
+      await customer.set({
+        name: name,
+        address: address,
+        contact: contact,
+      });
+      await customer.save();
+      res.status(200).json(customer);
+    });
+
+export {createCustomer, getAllCustomers, getACustomer, deleteACustomer, updateACustomer};

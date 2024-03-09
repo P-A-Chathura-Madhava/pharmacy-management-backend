@@ -2,7 +2,9 @@ import express from "express";
 import env from "dotenv";
 import { sequelize, connectToDb } from "./config/db.js";
 import authRouter from "./routes/authRoute.js";
+// creating the database
 // sequelize.sync().then(()=>console.log("db is ready"));
+
 import bodyParser from "body-parser";
 connectToDb();
 

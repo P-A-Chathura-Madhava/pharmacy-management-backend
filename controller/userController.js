@@ -4,6 +4,7 @@ import bcrypt, { hash } from "bcrypt";
 import { generateToken } from "../config/jwtToken.js";
 
 const createUser = asyncHandler(async (req, res) => {
+    // console.log(req.body);
   // creating user
   const { id, name, username, role, password } = req.body;
   const newUser = User.build({
@@ -24,7 +25,12 @@ const createUser = asyncHandler(async (req, res) => {
 
 const loginUserCtrl = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  const findUser = await User.findOne({ username: username });
+  const findUser = await User.findOne({
+    where: {
+      username: username,
+    },
+  });
+//   console.log(findUser);
   const isPasswordMatched = password === findUser.password;
   if (isPasswordMatched) {
     res.json({

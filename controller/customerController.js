@@ -19,4 +19,10 @@ const createCustomer = asyncHandler(async (req, res) => {
     }
   });
 
-export {createCustomer};
+  const getAllCustomers = asyncHandler(async (req, res) => {
+    // console.log("message: all customers");
+    const customers = await Customer.findAll();
+    res.status(200).json(customers);
+  });
+
+export {createCustomer, getAllCustomers};

@@ -34,4 +34,15 @@ const getAllMedications = asyncHandler(async (req, res) => {
     res.status(200).json(medication);
   });
 
-export {createMedication, getAllMedications, getAMedication};
+  const deleteAMedication = asyncHandler(async (req, res) => {
+    //   console.log("Delete a medication");
+    const medication = await Medication.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    await medication.destroy();
+    res.status(200).json({ message: "medication deleted" });
+  });
+
+export {createMedication, getAllMedications, getAMedication, deleteAMedication};

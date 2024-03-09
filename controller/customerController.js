@@ -63,4 +63,18 @@ const createCustomer = asyncHandler(async (req, res) => {
       res.status(200).json(customer);
     });
 
-export {createCustomer, getAllCustomers, getACustomer, deleteACustomer, updateACustomer};
+    const softDeleteACustomer = asyncHandler(async (req, res) => {
+      // console.log("soft delete a customer");
+      const customer = await Customer.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      await customer.set({
+        markDelete: true,
+      });
+      await customer.save();
+      res.status(200).json(customer);
+    });
+
+export {createCustomer, getAllCustomers, getACustomer, deleteACustomer, updateACustomer, softDeleteACustomer};

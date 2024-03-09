@@ -1,5 +1,5 @@
 import express from "express";
-import { authMiddleware, isAdmin } from "../middlewares/authMiddelware.js";
+import { authMiddleware, isOwner } from "../middlewares/authMiddelware.js";
 import { createCustomer, deleteACustomer, getACustomer, getAllCustomers, updateACustomer } from "../controller/customerController.js";
 const router = express.Router();
 

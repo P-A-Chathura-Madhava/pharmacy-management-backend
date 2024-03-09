@@ -1,5 +1,5 @@
 import express from "express";
-import { authMiddleware, isAdmin } from "../middlewares/authMiddelware.js";
+import { authMiddleware, isOwner } from "../middlewares/authMiddelware.js";
 import { createMedication, deleteAMedication, getAMedication, getAllMedications, updateAMedication } from "../controller/medicationController.js";
 const router = express.Router();
 

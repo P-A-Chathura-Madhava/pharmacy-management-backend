@@ -26,18 +26,46 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
   }
 });
 
-const isAdmin = asyncHandler(async (req, res, next) => {
+const isOwner = asyncHandler(async (req, res, next) => {
   const { id } = req.user;
   const adminUser = await User.findOne({
     where: {
       id: id,
     },
   });
-  if (adminUser.role !== "admin") {
+  if (adminUser.role !== "owner") {
     console.log("You are not an admin");
   } else {
     next();
   }
 });
 
-export { authMiddleware, isAdmin };
+const isManager = asyncHandler(async (req, res, next) => {
+  const { id } = req.user;
+  const adminUser = await User.findOne({
+    where: {
+      id: id,
+    },
+  });
+  if (adminUser.role !== "manager") {
+    console.log("You are not an admin");
+  } else {
+    next();
+  }
+});
+
+const isCashier = asyncHandler(async (req, res, next) => {
+  const { id } = req.user;
+  const adminUser = await User.findOne({
+    where: {
+      id: id,
+    },
+  });
+  if (adminUser.role !== "cashier") {
+    console.log("You are not an admin");
+  } else {
+    next();
+  }
+});
+
+export { authMiddleware, isOwner, isManager, isCashier };

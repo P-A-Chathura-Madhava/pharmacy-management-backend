@@ -32,18 +32,28 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
       name: findUser?.name,
       username: findUser?.username,
       role: findUser?.role,
-      token: generateToken(findUser?.id)
+      token: generateToken(findUser?.id),
     });
   } else {
     res.json({ message: "no data" });
   }
 });
 
-const getAllUsers = asyncHandler(async (req, res)=> {
-        // console.log("message: all users");
-        const users = await User.findAll();
-        // res.status(200).send(users);
-        res.status(200).json(users);
-})
+const getAllUsers = asyncHandler(async (req, res) => {
+  // console.log("message: all users");
+  const users = await User.findAll();
+  // res.status(200).send(users);
+  res.status(200).json(users);
+});
 
-export { createUser, loginUserCtrl, getAllUsers };
+const getAUser = asyncHandler(async (req, res) => {
+  // console.log("get a user");
+  const user = await User.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.status(200).json(user);
+});
+
+export { createUser, loginUserCtrl, getAllUsers, getAUser };

@@ -2,6 +2,7 @@ import express from "express";
 import env from "dotenv";
 import { sequelize, connectToDb } from "./config/db.js";
 import authRouter from "./routes/authRoute.js";
+import medicationRouter from "./routes/medicationRoute.js";
 // creating the database
 // sequelize.sync().then(()=>console.log("db is ready"));
 
@@ -18,6 +19,8 @@ const PORT = process.env.PORT || 4000;
 // });
 app.use(express.json());
 app.use("/api/user", authRouter);
+app.use("/api/medication", medicationRouter);
+
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 });

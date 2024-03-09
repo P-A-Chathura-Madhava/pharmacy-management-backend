@@ -24,4 +24,14 @@ const getAllMedications = asyncHandler(async (req, res) => {
     res.status(200).json(medicines);
   });
 
-export {createMedication, getAllMedications};
+  const getAMedication = asyncHandler(async (req, res) => {
+    // console.log("get a medication");
+    const medication = await Medication.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(medication);
+  });
+
+export {createMedication, getAllMedications, getAMedication};

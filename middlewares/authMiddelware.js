@@ -19,10 +19,10 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
         next();
       }
     } catch (error) {
-      console.log("Not autherized, token expired. Please login again");
+      throw new Error("Not autherized, token expired. Please login again");
     }
   } else {
-    console.log("There is no token attached");
+    throw new Error("There is no token attach to the hearder");
   }
 });
 
@@ -34,7 +34,7 @@ const isOwner = asyncHandler(async (req, res, next) => {
     },
   });
   if (adminUser.role !== "owner") {
-    console.log("You are not an admin");
+    throw new Error("You are not an admin");
   } else {
     next();
   }
@@ -47,8 +47,8 @@ const isOwnerOrManager = asyncHandler(async (req, res, next) => {
       id: id,
     },
   });
-  if (adminUser.role !== "manager" || adminUser.role !== "manager") {
-    console.log("You are not an admin");
+  if (adminUser.role !== "owner" || adminUser.role !== "manager") {
+    throw new Error("You are not an owner or manager");
   } else {
     next();
   }

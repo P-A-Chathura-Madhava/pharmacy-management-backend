@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="https://e7.pngegg.com/pngimages/748/441/png-clipart-logo-pharmacy-pills-miscellaneous-trademark.png" alt="Logo" width="80" height="80">
+    <img src="https://e7.pngegg.com/pngimages/748/441/png-clipart-logo-pharmacy-pills-miscellaneous-trademark.png" alt="Logo" width="100" height="80">
   </a>
 
 <h3 align="center">Pharmacy Management System Backend API</h3>
@@ -36,6 +36,11 @@
 ## About The Project
 
 In this projects a owner, managers and cashiers can visit the website for making the business more efficiently. They can check all the medicines, cashiers and managers. Also this API works on role based authentication, so each user have their user pevileges.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## ER Diagram of the project:
+![image](/images/paharmacy-ERD.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

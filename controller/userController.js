@@ -2,17 +2,19 @@ import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 import bcrypt, { hash } from "bcrypt";
 import { generateToken } from "../config/jwtToken.js";
+import { hashPassword, matchPassword } from "../config/passwordHash.js";
 
 const createUser = asyncHandler(async (req, res) => {
-    // console.log(req.body);
+  // console.log(req.body);
   // creating user
   const { id, name, username, role, password } = req.body;
+  const hashedPassword = await hashPassword(password);
   const newUser = User.build({
     id: id,
     name: name,
     username: username,
     role: role,
-    password: password,
+    password: hashedPassword,
   });
 
   try {
@@ -30,8 +32,9 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
       username: username,
     },
   });
-//   console.log(findUser);
-  const isPasswordMatched = password === findUser.password;
+  //   console.log(findUser);
+  // const isPasswordMatched = password === findUser.password;
+  const isPasswordMatched = await matchPassword(password, findUser.password);
   if (isPasswordMatched) {
     res.json({
       id: findUser?.id,

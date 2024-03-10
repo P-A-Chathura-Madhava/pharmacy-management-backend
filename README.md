@@ -72,6 +72,11 @@ In this projects a owner, managers and cashiers can visit the website for making
    ```sh
    npm install
    ```
+3. Apply .env file with below variables
+    ```sh
+    PORT=5000
+    JWT_SECRET=bearer
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
